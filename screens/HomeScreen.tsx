@@ -5,6 +5,7 @@ import { API_URL } from "@env";
 import { useForegroundPermissions, PermissionStatus, getCurrentPositionAsync } from "expo-location";
 import axios from "react-native-axios";
 import { OPEN_WEATHER_API_KEY } from "@env";
+import Header from "../components/ui/Header";
 // import { getWeather } from "../utils/weatherApi";
 
 export default function HomeScreen() {
@@ -75,7 +76,7 @@ export default function HomeScreen() {
         console.log(`${property}: ${data[property]}`);
         return (
             <View style={styles.container}>
-                
+                <Header title="location"/>
             </View>
         )
     }
