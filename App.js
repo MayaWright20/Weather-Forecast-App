@@ -7,6 +7,7 @@ import ForecastScreen from './screens/ForecastScreen';
 import SavedForecastsScreen from './screens/SavedForecastsScreen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { COLORS } from './constants/COLORS';
+import { LinearGradient } from 'expo-linear-gradient';
 export default function App() {
 
   const BottomTab = createBottomTabNavigator();
@@ -15,7 +16,10 @@ export default function App() {
     <NavigationContainer>
       <BottomTab.Navigator
       screenOptions={{
-        tabBarStyle: { display: 'flex',paddingBottom: 0, justifyContent: 'center' },
+        tabBarStyle: { display: 'flex',paddingBottom: 0, justifyContent: 'center', borderTopWidth:0 },
+        tabBarBackground:() =>(
+          <LinearGradient  colors={[COLORS.DARKEST_BLUE, COLORS.MEDIUM_BLUE]} style={{height:'100%'}}/>
+        )
       }}
       >
         <BottomTab.Screen 
@@ -25,18 +29,60 @@ export default function App() {
           headerShown: false,
           tabBarLabelStyle: {marginBottom: 20},
           tabBarIconStyle: {paddingTop: 0, marginTop:20},
-          tabBarActiveTintColor: COLORS.LIGHT_GREEN,
+          tabBarActiveTintColor: COLORS.WHITE,
           tabBarInactiveTintColor: COLORS.MEDIUM_GREY,
-          tabBarActiveBackgroundColor: COLORS.LIGHT_BLUE,
-          tabBarInactiveBackgroundColor: COLORS.DARK_BLUE,
+          tabBarActiveBackgroundColor: COLORS.DARKEST_BLUE_TRANSPARENT,
+          tabBarInactiveBackgroundColor: 'transparent',
           tabBarHideOnKeyboard: true,
-          tabBarLabel: 'Home',
+          tabBarLabel: 'Home1',
           tabBarBadge: '',
           tabBarBadgeStyle:{backgroundColor: 'transparent', paddingTop: 0},
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
         }}/>
+
+<BottomTab.Screen 
+        name="Curren Location"
+        component={HomeScreen} 
+        options={{
+          headerShown: false,
+          tabBarLabelStyle: {marginBottom: 20},
+          tabBarIconStyle: {paddingTop: 0, marginTop:20},
+          tabBarActiveTintColor: COLORS.WHITE,
+          tabBarInactiveTintColor: COLORS.MEDIUM_GREY,
+          tabBarActiveBackgroundColor: COLORS.DARKEST_BLUE_TRANSPARENT,
+          tabBarInactiveBackgroundColor: 'transparent',
+          tabBarHideOnKeyboard: true,
+          tabBarLabel: 'Home1',
+          tabBarBadge: '',
+          tabBarBadgeStyle:{backgroundColor: 'transparent', paddingTop: 0},
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}/>
+
+<BottomTab.Screen 
+        name="Curre Location"
+        component={HomeScreen} 
+        options={{
+          headerShown: false,
+          tabBarLabelStyle: {marginBottom: 20},
+          tabBarIconStyle: {paddingTop: 0, marginTop:20},
+          tabBarActiveTintColor: COLORS.WHITE,
+          tabBarInactiveTintColor: COLORS.MEDIUM_GREY,
+          tabBarActiveBackgroundColor: COLORS.DARKEST_BLUE_TRANSPARENT,
+          tabBarInactiveBackgroundColor: 'transparent',
+          tabBarHideOnKeyboard: true,
+          tabBarLabel: 'Home1',
+          tabBarBadge: '',
+          tabBarBadgeStyle:{backgroundColor: 'transparent', paddingTop: 0},
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}/>
+
+
       </BottomTab.Navigator>
     </NavigationContainer>
   );
