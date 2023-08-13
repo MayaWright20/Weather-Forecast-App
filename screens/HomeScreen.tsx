@@ -56,7 +56,7 @@ export default function HomeScreen() {
 
     async function getWeather(lat: number, lon: number){
         try{
-            const {data} = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=c434098cc3a004dade4fca9c8f8cc5c5`);
+            const {data} = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=`);
             setData({...data})
 
             return;
