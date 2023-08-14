@@ -74,7 +74,7 @@ export default function HomeScreen({navigation}) {
     }
 
     return (
-        <Screen buttonTitle="<" headerTitle="location" onPress={onPressHandler}>
+        <Screen buttonTitle={null} headerTitle="location" onPress={null}>
             <ScrollView>
                 {Object.entries(data).map(([property, value]) => (
                     <Text key={property}>{`${property}: ${value}`}</Text>

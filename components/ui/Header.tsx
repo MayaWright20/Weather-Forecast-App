@@ -7,7 +7,7 @@ import { WINDOW_WIDTH } from "../../constants/DIMENSIONS";
 
 interface HeaderProps {
     headerTitle: string;
-    buttonTitle: string;
+    buttonTitle: string | null;
     onPress: () => void | null;
 }
 
@@ -36,18 +36,37 @@ const styles = StyleSheet.create({
         width: '100%',
         borderBottomColor: COLORS.DARKEST_BLUE,
         backgroundColor: COLORS.MEDIUM_BLUE,
+        borderBottomWidth: 1,
+        shadowColor: 'black',
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        elevation: 100,
+        zIndex: 2
     },
     headerWrapper: {
         paddingBottom: 5,
-        borderBottomColor: COLORS.DARKEST_GREY,
-        borderBottomWidth: 5,
+        borderBottomColor: COLORS.DARKEST_BLUE,
+        borderBottomWidth: 1,
+        shadowColor: 'black',
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        elevation: 100,
+        zIndex: 2
     },
     titleWrapper: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center', // Center horizontally
-        // backgroundColor: 'pink',
-        paddingVertical: 10, // Adjust this value if needed
+        justifyContent: 'center',
+
+        paddingVertical: 10, 
     },
     headerTitle: {
         fontSize: 30,
@@ -68,7 +87,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.3,
         shadowRadius: 5,
-        elevation: 5,
+        elevation: 500,
         zIndex: 2
     },
 });

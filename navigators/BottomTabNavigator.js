@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { COLORS } from '../constants/COLORS';
+import { WINDOW_HEIGHT } from '../constants/DIMENSIONS';
 
 import HomeStackNavigator from './HomeStackNavigator';
 
@@ -86,6 +87,7 @@ export default function BottomTabNavigator() {
       initialRouteName={"CurrentLocation"}
         screenOptions={{
           tabBarStyle: {
+            height: Platform.OS === 'ios' ? WINDOW_HEIGHT/12 : WINDOW_HEIGHT/10 ,
             display: 'flex', paddingBottom: 0, justifyContent: 'center', borderTopWidth: 0,
             position: 'absolute', bottom: 25, left: 20, right: 20, zIndex: 2, elevation: 0, borderRadius: 15,
             ...styles.bottomTabNavigatorShadow
@@ -138,7 +140,7 @@ export default function BottomTabNavigator() {
             tabBarItemStyle: { borderBottomRightRadius: 15, borderTopEndRadius: 15 },
             headerShown: false,
             tabBarLabelStyle: { marginBottom: 20 },
-            tabBarIconStyle: { paddingTop: 0, marginTop: 20 },
+            tabBarIconStyle: { paddingTop: 0,  marginTop: 20 },
             tabBarActiveTintColor: COLORS.WHITE,
             tabBarInactiveTintColor: COLORS.DARKEST_GREY,
             tabBarActiveBackgroundColor: COLORS.DARKEST_BLUE_TRANSPARENT,
@@ -161,6 +163,7 @@ const styles = StyleSheet.create({
       height: 10
     },
     shadowOpacity: 0.25,
-    shadowRadius: 3.5
+    shadowRadius: 3.5,
+    elevation: 5,
   }
 })
