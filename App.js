@@ -10,6 +10,7 @@ import CurrentForecastScreen from './screens/CurrentForecastScreen';
 import SavedCitiesScreen from './screens/SavedCitiesScreen';
 import SearchCitiesScreen from './screens/SearchCitiesScreen';
 
+
 const BottomTab = createBottomTabNavigator();
 
 const CustomTabBarButton = ({ children, onPress }, props) => (
