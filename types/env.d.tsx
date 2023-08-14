@@ -1,3 +1,3 @@
 declare module '@env' {
-    export const API_BASE: string;
+    export const OPEN_WEATHER_API_KEY: string;
 }

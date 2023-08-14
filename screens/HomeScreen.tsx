@@ -1,22 +1,19 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import { Alert, View, Text, StyleSheet, ScrollView } from "react-native";
-import { StatusBar } from 'expo-status-bar';
-import { API_URL } from "@env";
 import { useForegroundPermissions, PermissionStatus, getCurrentPositionAsync } from "expo-location";
-import axios from "react-native-axios";
 import { OPEN_WEATHER_API_KEY } from "@env";
-import Header from "../components/ui/Header";
-import { COLORS } from "../constants/COLORS";
-import { LinearGradient } from "expo-linear-gradient";
+import axios from "react-native-axios";
+import Screen from "../components/ui/Screen";
 
-// import { getWeather } from "../utils/weatherApi";
+interface WeatherData {
+    [key: string]: any;
+}
 
 export default function HomeScreen() {
-
     const [locationPermissionInformation, requestPermission] = useForegroundPermissions();
     const [lat, setLat] = useState(0);
     const [lon, setLon] = useState(0);
-    const [data, setData] = useState({});
+    const [data, setData] = useState<WeatherData>({});
 
     async function verifyPermissions() {
         if (locationPermissionInformation.status === PermissionStatus.UNDETERMINED) {
@@ -33,11 +30,9 @@ export default function HomeScreen() {
         }
 
         return true;
-
     }
 
     async function getLocationHandler() {
-
         try {
             const hasPermission = await verifyPermissions();
 
@@ -45,68 +40,44 @@ export default function HomeScreen() {
                 return;
             }
 
-            const location = await getCurrentPositionAsync({ timeInterval: 300000 }); //updates location every 5 minutes
+            const location = await getCurrentPositionAsync({ timeInterval: 300000 });
             setLat(location.coords.latitude);
             setLon(location.coords.longitude);
-
-            return;
         } catch (error) {
-            console.log("error", error)
+            console.log("error", error);
         }
-
-
     }
 
-    async function getWeather(lat: number, lon: number) {
+    async function getWeather(latitude: number, longitude: number) {
         try {
-            const { data } = await axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=c434098cc3a004dade4fca9c8f8cc5c5`);
-            setData({ ...data })
-
-            return;
+            const response = await axios.get(
+                `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${OPEN_WEATHER_API_KEY}`
+            );
+            setData({ ...response.data });
         } catch (error) {
-            console.log("getWeather error", error)
+            return(
+            <Text>Error</Text>
+            )
         }
     }
 
+    useLayoutEffect(() => {
+        getLocationHandler();
+    }, [data]);
 
-
-    getLocationHandler();
     useEffect(() => {
         getWeather(lat, lon);
-    }, [])
+    }, [lat, lon]);
 
-
-    for (const property in data) {
-        console.log(`${property}: ${data[property]}`);
-        return (
-            <View>
-                <Header title="location" />
-                {/* <View style={styles.container}> */}
-                    <LinearGradient
-                        // Background Linear Gradient
-                        colors={[COLORS.DARKEST_BLUE, COLORS.MEDIUM_BLUE]}
-                        style={styles.c}
-                    >
-                        <ScrollView>
-                            <Text>hey</Text>
-                        </ScrollView>
-                    </LinearGradient>
-                </View>
-            // </View>
-        )
-    }
-
+    return (
+        <Screen title="location">
+            <ScrollView>
+                {Object.entries(data).map(([property, value]) => (
+                    <Text key={property}>{`${property}: ${value}`}</Text>
+                ))}
+            </ScrollView>
+        </Screen>
+    );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        // flex: 1,
-        // backgroundColor: COLORS.DARKEST_BLUE,
-        alignItems: 'center',
-        // justifyContent: 'center',
-    },
-    c:{
-        width: '100%',
-        height: '100%'
-    }
-});
+const styles = StyleSheet.create({});
