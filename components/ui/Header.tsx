@@ -5,15 +5,18 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Header({ title }) {
     return (
-        <View style={styles.headerContainer}>
+        <View style={[styles.headerContainer, styles.bottomTabNavigatorShadow]}>
             <LinearGradient
                 // Background Linear Gradient
-                colors={[COLORS.DARKEST_BLUE, COLORS.MEDIUM_BLUE]}
-                style={styles.headerWrapper}
+                colors={[ COLORS.MEDIUM_BLUE, COLORS.DARKEST_BLUE,]}
+                style={[styles.headerWrapper]}
             >
+                {/* <View style={styles.bottomTabNavigatorShadow}> */}
                 <SafeAreaView>
                     <Text style={styles.headerTitle}>{title}</Text>
                 </SafeAreaView>
+                {/* </View> */}
+                
             </LinearGradient>
         </View>
     )
@@ -39,6 +42,16 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 30,
         color: COLORS.WHITE
+    },
+    bottomTabNavigatorShadow:{
+        shadowColor: 'black',
+        shadowOffset:{
+          width: 0,
+          height: 40
+        },
+        shadowOpacity: 0.3,
+        shadowRadius: 45,
+        zIndex: 2
     }
 
 });
