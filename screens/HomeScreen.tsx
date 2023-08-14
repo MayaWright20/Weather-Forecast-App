@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useLayoutEffect } from "react";
-import { Alert, View, Text, StyleSheet, ScrollView } from "react-native";
+import { Alert, View, Text, StyleSheet, ScrollView, Button } from "react-native";
 import { useForegroundPermissions, PermissionStatus, getCurrentPositionAsync } from "expo-location";
 import { OPEN_WEATHER_API_KEY } from "@env";
 import axios from "react-native-axios";
@@ -9,7 +9,7 @@ interface WeatherData {
     [key: string]: any;
 }
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
     const [locationPermissionInformation, requestPermission] = useForegroundPermissions();
     const [lat, setLat] = useState(0);
     const [lon, setLon] = useState(0);
@@ -69,8 +69,12 @@ export default function HomeScreen() {
         getWeather(lat, lon);
     }, [lat, lon]);
 
+    function onPressHandler(){
+        navigation.navigate('CurrentForecastScreen')
+    }
+
     return (
-        <Screen title="location">
+        <Screen buttonTitle="<" headerTitle="location" onPress={onPressHandler}>
             <ScrollView>
                 {Object.entries(data).map(([property, value]) => (
                     <Text key={property}>{`${property}: ${value}`}</Text>

@@ -4,7 +4,7 @@ import Screen from "../components/ui/Screen";
 
 const SearchCitiesScreen: React.FC = () => {
     return (
-        <Screen title="Search Cities">
+        <Screen buttonTitle="" headerTitle="Search Cities" onPress={null} >
             
         </Screen>
     );

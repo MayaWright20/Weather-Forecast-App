@@ -5,14 +5,16 @@ import { COLORS } from "../../constants/COLORS";
 import Header from "./Header";
 
 interface ScreenProps {
-    title: string;
+    buttonTitle: string;
     children: ReactNode;
+    headerTitle: string;
+    onPress: ()=> void | null;
 }
 
-export default function Screen({ title, children }: ScreenProps) {
+export default function Screen({ buttonTitle, children, headerTitle, onPress }: ScreenProps) {
     return (
         <View style={styles.container}>
-            <Header title={title} />
+            <Header buttonTitle={buttonTitle} headerTitle={headerTitle} onPress={onPress} />
             <LinearGradient
                 colors={[COLORS.DARKEST_BLUE, COLORS.MEDIUM_BLUE]}
                 style={styles.linearGradient}

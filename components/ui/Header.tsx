@@ -1,14 +1,17 @@
 import React from "react";
-import { View, Text, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { COLORS } from "../../constants/COLORS";
+import { WINDOW_WIDTH } from "../../constants/DIMENSIONS";
 
 interface HeaderProps {
-    title: string;
+    headerTitle: string;
+    buttonTitle: string;
+    onPress: () => void | null;
 }
 
-const Header: React.FC<HeaderProps> = ({ title }) => {
+const Header: React.FC<HeaderProps> = ({ headerTitle, buttonTitle, onPress }) => {
     return (
         <View style={[styles.headerContainer, styles.bottomTabNavigatorShadow]}>
             <LinearGradient
@@ -16,7 +19,12 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
                 style={styles.headerWrapper}
             >
                 <SafeAreaView>
-                    <Text style={styles.headerTitle}>{title}</Text>
+                    <View style={styles.titleWrapper}>
+                        <TouchableOpacity onPress={onPress} style={styles.backButtonWrapper}>
+                            <Text style={[styles.headerTitle, styles.backButtonText]}>{buttonTitle}</Text>
+                        </TouchableOpacity>
+                        <Text style={styles.headerTitle}>{headerTitle}</Text>
+                    </View>
                 </SafeAreaView>
             </LinearGradient>
         </View>
@@ -26,7 +34,6 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
 const styles = StyleSheet.create({
     headerContainer: {
         width: '100%',
-        justifyContent: 'center',
         borderBottomColor: COLORS.DARKEST_BLUE,
         backgroundColor: COLORS.MEDIUM_BLUE,
     },
@@ -35,10 +42,23 @@ const styles = StyleSheet.create({
         borderBottomColor: COLORS.DARKEST_GREY,
         borderBottomWidth: 5,
     },
+    titleWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center', // Center horizontally
+        // backgroundColor: 'pink',
+        paddingVertical: 10, // Adjust this value if needed
+    },
     headerTitle: {
-        textAlign: 'center',
         fontSize: 30,
         color: COLORS.WHITE,
+    },
+    backButtonWrapper: {
+        position: 'absolute',
+        left: 10
+    },
+    backButtonText:{
+        fontSize: 14
     },
     bottomTabNavigatorShadow: {
         shadowColor: 'black',
@@ -54,9 +74,3 @@ const styles = StyleSheet.create({
 });
 
 export default Header;
-
-
-
-
-
-

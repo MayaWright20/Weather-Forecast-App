@@ -5,7 +5,7 @@ import Screen from "../components/ui/Screen";
 
 const SavedCitiesScreen: React.FC = () => {
     return (
-        <Screen title="Saved Cities">
+        <Screen buttonTitle="" headerTitle="Saved Cities" onPress={null}>
             <Text>Saved cities</Text>
         </Screen>
     );

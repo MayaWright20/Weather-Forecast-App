@@ -1,11 +1,20 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import Screen from "../components/ui/Screen";
 
-const CurrentForecastScreen: React.FC = () => {
+interface CurrentForecastScreenProps {
+    navigation: any; 
+}
+
+const CurrentForecastScreen: React.FC<CurrentForecastScreenProps> = ({ navigation }) => {
+    const onPressHandler = () => {
+        navigation.navigate('HomeScreen');
+    };
+
     return (
-        <View style={styles.container}>
-            <Text>FORECAST SCREEN</Text>
-        </View>
+        <Screen buttonTitle="back" headerTitle="Current Forecast" onPress={onPressHandler}>
+    
+        </Screen>
     );
 };
 
@@ -19,3 +28,4 @@ const styles = StyleSheet.create({
 });
 
 export default CurrentForecastScreen;
+
