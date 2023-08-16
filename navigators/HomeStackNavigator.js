@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 const HomeStack = createStackNavigator();
 
 import HomeScreen from '../screens/HomeScreen';
-import CurrentForecastScreen from "../screens/CurrentForecastScreen";
+import ForecastScreen from "../screens/ForecastScreen";
 
 export default function HomeStackNavigator() {
     return (
@@ -17,8 +17,8 @@ export default function HomeStackNavigator() {
                 }}
             />
             <HomeStack.Screen
-                name="CurrentForecastScreen"
-                component={CurrentForecastScreen}
+                name="ForecastScreen"
+                component={ForecastScreen}
                 options={{
                     headerShown: false,
                 }}
