@@ -9,10 +9,9 @@ import { getMap } from "../../utils/GetMap";
 import { getWeather } from "../../utils/GetWeather";
 import LoadingOverlay from "./Loading";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
-
-export default function HomeScreen({ForecastScreen}) {
+export default function Weather({ CityForecastScreen, ForecastScreen,coords,latitude, longitude, buttonTitle,headerTitle, onPressBackHandler}) {
     const [locationPermissionInformation, requestPermission] = useForegroundPermissions();
     const [lat, setLat] = useState(0);
     const [lon, setLon] = useState(0);
@@ -52,8 +51,14 @@ export default function HomeScreen({ForecastScreen}) {
             }
 
             const location = await getCurrentPositionAsync({ timeInterval: 30000 });
+
+            if(coords){
+                setLat(latitude)
+                setLon(longitude)
+            }else{
             setLat(location.coords.latitude);
             setLon(location.coords.longitude);
+            }
         } catch (error) {
             console.log("error", error);
         }
@@ -67,7 +72,7 @@ export default function HomeScreen({ForecastScreen}) {
     useEffect(() => {
         setLoading(true)
         async function getLocationWeather() {
-            const weatherData = await getWeather( lat, lon);
+            const weatherData = await getWeather( 'forecast.json', `${lat},${lon}`);
             setIconURL(weatherData[1].value.condition.icon)
             setDescription(weatherData[1].value.condition.text)
             setTemperature(weatherData[1].value.temp_c)
@@ -81,13 +86,21 @@ export default function HomeScreen({ForecastScreen}) {
     }, [lat, lon, mapURL]);
 
     const navigation = useNavigation();
-
-    function onPressHandler() {
-        navigation.navigate('ForecastScreen', {
+    function onPressHandler(){
+    if(!coords){
+        navigation.navigate('ForecastScreen',{
             lat: lat,
-            lon, lon
+            lon: lon
+        })
+    }else{
+        navigation.navigate('CityForecastScreen',{
+            lat: latitude,
+            lon: longitude
         })
     }
+}
+
+
 
     if (loading) {
         return <LoadingOverlay />
@@ -95,7 +108,7 @@ export default function HomeScreen({ForecastScreen}) {
 
 
     return (
-        <Screen buttonTitle={null} headerTitle={`${location}`} onPress={null}>
+        <Screen buttonTitle={buttonTitle} headerTitle={headerTitle} onPress={onPressBackHandler}>
             <ScrollView style={styles.contentsContainer}>
                 <View>
                     <LinearGradient

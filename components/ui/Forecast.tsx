@@ -13,7 +13,7 @@ export default function Forecast({lat, lon }){
     useEffect(()=>{
 
         async function getForcastData(){
-            const weatherData = await getWeather(lat, lon);
+            const weatherData = await getWeather('forecast.json',`${lat},${lon}`);
 
             const daysArr = [];
             for(let i=0; i<5; i++){

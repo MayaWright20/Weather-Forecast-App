@@ -12,86 +12,26 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 import Weather from "../components/ui/Weather"
 
-export default function HomeScreen({ navigation }) {
-    // const [locationPermissionInformation, requestPermission] = useForegroundPermissions();
-    // const [lat, setLat] = useState(0);
-    // const [lon, setLon] = useState(0);
-    // const [iconURL, setIconURL] = useState('');
-    // const [mapURL, setMapURL] = useState('https://maps.googleapis.com/maps/api/staticmap?center=0,0&zoom=14&size=400x400&maptype=roadmap');
-    // const [loading, setLoading] = useState(false);
-    // const [location, setLocation] = useState('')
-    // const [description, setDescription] = useState('');
-    // const [temperature, setTemperature] = useState('')
+export default function HomeScreen({ navigation, route }) {
 
-    // async function verifyPermissions() {
+    function onPressHandler(){
+        navigation.navigate('ForecastScreen')
+    }
 
-    //     if (locationPermissionInformation.status === PermissionStatus.UNDETERMINED) {
-    //         const permissionResponse = await requestPermission();
-    //         return permissionResponse.granted;
-    //     }
-
-    //     if (locationPermissionInformation.status === PermissionStatus.DENIED) {
-    //         Alert.alert(
-    //             "Location Permissions Needed",
-    //             "Please grant access for location to use this app"
-    //         );
-    //         return false;
-    //     }
-
-    //     return true;
-
-    // }
-
-    // async function getLocationHandler() {
-    //     setLoading(true)
-    //     try {
-    //         const hasPermission = await verifyPermissions();
-
-    //         if (!hasPermission) {
-    //             return;
-    //         }
-
-    //         const location = await getCurrentPositionAsync({ timeInterval: 30000 });
-    //         setLat(location.coords.latitude);
-    //         setLon(location.coords.longitude);
-    //     } catch (error) {
-    //         console.log("error", error);
-    //     }
-    //     setLoading(false)
-    // }
-
-    // useEffect(() => {
-    //     getLocationHandler();
-    // }, [mapURL, location]);
-
-    // useEffect(() => {
-    //     setLoading(true)
-    //     async function getWeather() {
-    //         const weatherData = await getCurrentWeather('current.json', lat, lon);
-    //         setIconURL(weatherData[1].value.condition.icon)
-    //         setDescription(weatherData[1].value.condition.text)
-    //         setTemperature(weatherData[1].value.temp_c)
-    //         setLocation(weatherData[0].value.tz_id)
-    //     }
-    //     getWeather()
-
-    //     const URL = getMap(lat, lon);
-    //     setMapURL(URL);
-    //     setLoading(false)
-    // }, [lat, lon, mapURL]);
-
-
-    // function onPressHandler() {
-    //     navigation.navigate('CurrentForecastScreen')
-    // }
-
-    // if (loading) {
-    //     return <LoadingOverlay />
-    // }
-
+    function onPressBackHandler(){
+        navigation.navigate('HomeScreen')
+    }
 
     return (
-        <Weather/>
+            <Weather
+            // onPressHandler={onPressHandler} 
+            buttonTitle={null}
+            headerTitle={`Current Location`} 
+            onPressBackHandler={onPressBackHandler}
+            latitude={null}
+            longitude={null}
+            coords={false}
+            />
     );
 }
 

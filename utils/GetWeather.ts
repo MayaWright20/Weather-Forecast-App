@@ -1,10 +1,10 @@
 import axios from "react-native-axios";
 import { WEATHER_API_KEY } from "@env";
 
-export async function getWeather( lat: number, lon: number) {
+export async function getWeather( api_method:string, query) {
     try {
         const response = await axios.get(
-            `https://api.weatherapi.com/v1/forecast.json?key=${WEATHER_API_KEY}&q=${lat},${lon}&days=5`
+            `https://api.weatherapi.com/v1/${api_method}?key=${WEATHER_API_KEY}&q=${query}&days=5`
         );
 
 

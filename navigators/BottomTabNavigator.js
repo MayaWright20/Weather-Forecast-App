@@ -9,6 +9,7 @@ import { COLORS } from '../constants/COLORS';
 import { WINDOW_HEIGHT } from '../constants/DIMENSIONS';
 
 import HomeStackNavigator from './HomeStackNavigator';
+import CitiesStackNavigator from './CitiesStackNavigator';
 
 import HomeScreen from '../screens/HomeScreen';
 import SavedCitiesScreen from '../screens/SavedCitiesScreen';
@@ -96,8 +97,8 @@ export default function BottomTabNavigator() {
         }}
       >
         <BottomTab.Screen
-          name="SearchCitiesScreen"
-          component={SearchCitiesScreen}
+          name="CitiesStackNavigator"
+          component={CitiesStackNavigator}
           options={{
             headerShown: false,
             tabBarItemStyle: { borderBottomLeftRadius: 15, borderTopStartRadius: 15 },

@@ -1,13 +1,29 @@
-import React from "react";
-import { View, Text } from "react-native";
+import React, {useEffect} from "react";
+import { View, Text, StyleSheet } from "react-native";
 import Screen from "../components/ui/Screen";
+import SearchBar from "../components/form/SearchBar";
+import SearchResult from "../components/form/SearchResult";
+import { getWeather } from "../utils/GetWeather";
 
-const SearchCitiesScreen: React.FC = () => {
+export default function SearchCitiesScreen(){
+
+    function onPressOutHandler(){
+        
+    }
+
+
     return (
         <Screen buttonTitle="" headerTitle="Search Cities" onPress={null} >
-            
+            <View style={styles.searchBarContainer}>
+            <SearchBar/>
+            </View>
         </Screen>
     );
 };
 
-export default SearchCitiesScreen;
+const styles = StyleSheet.create({
+    searchBarContainer:{
+        height: '100%',
+    }
+})
+
