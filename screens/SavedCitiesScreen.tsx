@@ -1,9 +1,8 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { StatusBar } from 'expo-status-bar';
+import {  Text } from "react-native";
 import Screen from "../components/ui/Screen";
 
-const SavedCitiesScreen: React.FC = () => {
+export default function SavedCitiesScreen(){
     return (
         <Screen buttonTitle="" headerTitle="Saved Cities" onPress={null}>
             <Text>Saved cities</Text>
@@ -11,13 +10,3 @@ const SavedCitiesScreen: React.FC = () => {
     );
 };
 
-const styles = StyleSheet.create({
-    // container: {
-    //     flex: 1,
-    //     backgroundColor: 'blue',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    // },
-});
-
-export default SavedCitiesScreen;

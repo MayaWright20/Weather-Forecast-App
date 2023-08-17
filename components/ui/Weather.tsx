@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, View, Text, StyleSheet, ScrollView, Button, Image } from "react-native";
+import { Alert, View, Text, StyleSheet, ScrollView, Image } from "react-native";
 import { useForegroundPermissions, PermissionStatus, getCurrentPositionAsync } from "expo-location";
 import Screen from "./Screen";
 import { LinearGradient } from "expo-linear-gradient";
@@ -11,7 +11,7 @@ import LoadingOverlay from "./Loading";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Weather({ CityForecastScreen, ForecastScreen,coords,latitude, longitude, buttonTitle,headerTitle, onPressBackHandler}) {
+export default function Weather({ coords,latitude, longitude, buttonTitle,headerTitle, onPressBackHandler}) {
     const [locationPermissionInformation, requestPermission] = useForegroundPermissions();
     const [lat, setLat] = useState(0);
     const [lon, setLon] = useState(0);

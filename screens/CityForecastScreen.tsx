@@ -13,9 +13,8 @@ export default function CityForecastScreen({navigation, route}){
         });
     };
     return(
-        <Screen buttonTitle="back" headerTitle="Current Forecast" onPress={onPressHandler}>
+        <Screen buttonTitle="back" headerTitle="City Forecast" onPress={onPressHandler}>
             <Forecast lat={lat} lon={lon}/>
-            {/* <Text>forecast screen</Text> */}
         </Screen>
     )
 }

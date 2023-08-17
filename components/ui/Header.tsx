@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from "react-na
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { COLORS } from "../../constants/COLORS";
-import { WINDOW_WIDTH } from "../../constants/DIMENSIONS";
 
 interface HeaderProps {
     headerTitle: string;

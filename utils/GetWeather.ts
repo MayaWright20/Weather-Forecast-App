@@ -7,7 +7,6 @@ export async function getWeather( api_method:string, query) {
             `https://api.weatherapi.com/v1/${api_method}?key=${WEATHER_API_KEY}&q=${query}&days=5`
         );
 
-
         const weatherData = [];
         for(const[key, value] of Object.entries(response.data)){
             
@@ -17,8 +16,7 @@ export async function getWeather( api_method:string, query) {
             weatherData.push(weatherObj)
             
         }
-        // console.log("weather",weatherDataArr)
-        // setData(weatherDataArr);
+
     return weatherData
     }catch(error){
         return error

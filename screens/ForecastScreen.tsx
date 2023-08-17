@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React from "react";
 import Screen from "../components/ui/Screen";
 import Forecast from "../components/ui/Forecast";
 

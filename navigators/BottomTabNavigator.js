@@ -11,9 +11,8 @@ import { WINDOW_HEIGHT } from '../constants/DIMENSIONS';
 import HomeStackNavigator from './HomeStackNavigator';
 import CitiesStackNavigator from './CitiesStackNavigator';
 
-import HomeScreen from '../screens/HomeScreen';
 import SavedCitiesScreen from '../screens/SavedCitiesScreen';
-import SearchCitiesScreen from '../screens/SearchCitiesScreen';
+
 
 
 const BottomTab = createBottomTabNavigator();

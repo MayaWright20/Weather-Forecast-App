@@ -6,7 +6,6 @@ import { COLORS } from "../../constants/COLORS";
 import SearchResult from "./SearchResult";
 import { getWeather } from "../../utils/GetWeather";
 import { useNavigation } from '@react-navigation/native';
-import CityForecastScreen from "../../screens/CityForecastScreen";
 
 
 export default function SearchBar() {
@@ -32,7 +31,7 @@ export default function SearchBar() {
 
     function cityLocationHandler(){
         navigation.navigate('CityScreen',{
-            screenName: 'CityForecastScreen',
+            screenName: `${name}`,
             lat: lat,
             lon: lon
         })
