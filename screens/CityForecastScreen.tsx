@@ -6,7 +6,11 @@ import Forecast from '../components/ui/Forecast';
 export default function CityForecastScreen({navigation, route}){
     const {lat, lon} = route.params;
     const onPressHandler = () => {
-        navigation.navigate('CityScreen');
+        navigation.navigate('CityScreen',{
+            screenName: 'CityForecastScreen',
+            lat: lat,
+            lon: lon
+        });
     };
     return(
         <Screen buttonTitle="back" headerTitle="Current Forecast" onPress={onPressHandler}>
