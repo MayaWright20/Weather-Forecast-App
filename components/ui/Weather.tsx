@@ -100,12 +100,9 @@ export default function Weather({ coords,latitude, longitude, buttonTitle,header
     }
 }
 
-
-
     if (loading) {
         return <LoadingOverlay />
     }
-
 
     return (
         <Screen buttonTitle={buttonTitle} headerTitle={headerTitle} onPress={onPressBackHandler}>
