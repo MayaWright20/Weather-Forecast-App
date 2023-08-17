@@ -7,7 +7,7 @@ export default function CityForecastScreen({navigation, route}){
     const {lat, lon} = route.params;
     const onPressHandler = () => {
         navigation.navigate('CityScreen',{
-            screenName: 'CityForecastScreen',
+            screenName: 'City Forecast',
             lat: lat,
             lon: lon
         });

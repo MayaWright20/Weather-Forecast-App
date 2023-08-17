@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { View, Text, TextInput, StyleSheet, Alert, TouchableOpacity } from "react-native";
 import { WINDOW_HEIGHT } from "../../constants/DIMENSIONS";
 import { LinearGradient } from "expo-linear-gradient";
@@ -6,27 +6,43 @@ import { COLORS } from "../../constants/COLORS";
 import SearchResult from "./SearchResult";
 import { getWeather } from "../../utils/GetWeather";
 import { useNavigation } from '@react-navigation/native';
+import { SavedCitiesContext } from "../../context/savedCities";
 
 
 export default function SearchBar() {
+    const savedCitiesCtx = useContext(SavedCitiesContext);
+
+    
     const [searchQuery, setSearchQuery] = useState('Search for city');
     const [lat, setLat] = useState(0);
     const [lon, setLon] = useState(0);
+    const [cityId, setCityId] = useState('');
     const [name, setName] = useState('');
     const navigation = useNavigation();
+    const [cityIsSaved, setCityIsSaved] = useState(false);
 
     
+    
     async function onPressHandler(){
+        if(searchQuery === 'Search for city' || ''){
+            return Alert.alert('type in a city name')
+        }
         try{
         const response = await getWeather('search.json',searchQuery);
         setLat(response[0].value.lat);
         setLon(response[0].value.lon);
+        setCityId(`${response[0].value.lat},${response[0].value.lon},${response[0].value.country}/${response[0].value.name}`)
         setName(`${response[0].value.country}/${response[0].value.name}`)
+
         return response
         }catch(error){
             return Alert.alert('Something went wrong', 'please try again later')
         }
     }
+    
+    useEffect(() => {
+        setCityIsSaved(savedCitiesCtx.ids.includes(cityId));
+    }, [savedCitiesCtx.ids, cityId]);
 
 
     function cityLocationHandler(){
@@ -36,6 +52,18 @@ export default function SearchBar() {
             lon: lon
         })
     }
+
+
+        function changeSavedCityStatusHandler(){
+            console.log('clicked');
+            if(cityIsSaved){
+                savedCitiesCtx.removeCity(cityId);
+            }else{
+                savedCitiesCtx.addCity(cityId)
+            }
+        }
+
+    
 
 
     return (
@@ -59,7 +87,9 @@ export default function SearchBar() {
             </TouchableOpacity>
         </View>
         <View>
-            <SearchResult resultTitle={`${name}`} onPress={cityLocationHandler}/>
+            <SearchResult resultTitle={`${name}`} onPress={cityLocationHandler}
+                saveCityHandler={changeSavedCityStatusHandler} 
+                heartIcon={cityIsSaved? '❤':'🤍'}/>
         </View>
     </View>
     )
